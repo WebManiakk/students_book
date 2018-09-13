@@ -1,4 +1,5 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/header.php');?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
+$student = new student;?>
 <div class="dashboard-content">
     <div class="headline buttons primary">
 		<h4>Форма добавления нового студента</h4>
@@ -7,29 +8,33 @@
         <div class="form-box-item">
         	<h4>Добавити</h4>
         	<hr class="line-separator">
-        	<form id="profile-info-form">
+        	<form action="">
         		<!-- INPUT CONTAINER -->
         		<div class="input-container">
                     <label for="first_name" class="rl-label">Ім'я</label>
-                    <input type="text" id="first_name" value="" placeholder="Введіть ваше Ім'я">
+                    <input type="text" id="first_name" name="name" value="" placeholder="Введіть Ім'я">
         		</div>
 
         		<div class="input-container">
                     <label for="last_name" class="rl-label">Прізвище</label>
-                    <input type="text" id="last_name" value="" placeholder="Введіть ваше прізвище">
+                    <input type="text" id="last_name" name="lastname" value="" placeholder="Введіть прізвище">
         		</div>
 
         		<div class="input-container">
-                    <label for="new_email" class="rl-label">Вік</label>
-                    <input type="email" id="new_email" name="" value="akweb.com.ua@gmail.com" placeholder="Введіть вашу електронну адресу">
+                    <label for="age" class="rl-label">Вік</label>
+                    <input type="text" id="age" name="age" value="" placeholder="Введіть вік">
         		</div>
 
         		<div class="input-container">
-                    <label for="personal_phone" class="rl-label">Група</label>
-                    <input type="text" id="personal_phone" value="" placeholder="Введіть ваш телефон">
+                    <label for="grup" class="rl-label">Група</label>
+                    <input type="text" id="grup" name="grup" value="" placeholder="Введіть групу">
         		</div>
                 <button type="submit" class="button mid-short primary">Зберегти зміни</button>
         	</form>
+            <?php
+            if($_REQUEST){
+                $student->add_students($_REQUEST['name'], $_REQUEST['lastname'], $_REQUEST['age'], $_REQUEST['grup']);
+            };?>
         </div>
     </div>
 </div>
