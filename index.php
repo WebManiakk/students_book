@@ -1,9 +1,14 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/header.php');?>
 <?php
 $student = new student;
-$student->get_students();
+$arResult = $student->get_students();
+if($_REQUEST['deleted']){
+    $student->delete($_REQUEST['deleted']);
+}
 ?>
+
 <div class="dashboard-content">
+
     <div class="headline buttons primary">
 		<h4>Список студентов</h4>
 	</div>
@@ -16,39 +21,18 @@ $student->get_students();
         <th>Група</th>
         <th>Действие</th>
     </tr>
-    <tr>
-        <td>Etiam dolor</td>
-        <td>100%</td>
-        <td>Нет</td>
-        <td>Нет</td>
-        <td><a href="#">редактировать</a><br>
-            <a href="#">Удалить</a>
-        </td>
-    </tr>
-    <tr>
-        <td>Etiam dolor</td>
-        <td>100%</td>
-        <td>Да</td>
-        <td>Да</td>
-    </tr>
-    <tr>
-        <td>Etiam dolor</td>
-        <td>50%</td>
-        <td>Да</td>
-        <td>Да</td>
-    </tr>
-    <tr>
-        <td>Etiam dolor</td>
-        <td>0%</td>
-        <td>Да</td>
-        <td>Да</td>
-    </tr>
-    <tr>
-        <td>Etiam dolor</td>
-        <td>100%</td>
-        <td>Да</td>
-        <td>Да</td>
-    </tr>
+    <?php foreach($arResult as $arItem){?>
+        <tr>
+            <td><?=$arItem['name']?></td>
+            <td><?=$arItem['lastname']?></td>
+            <td><?=$arItem['age']?></td>
+            <td><?=$arItem['grup']?></td>
+            <td><a href="/update/?id=<?=$arItem['id']?>">редактировать</a><br>
+                <a href="?deleted=<?=$arItem['id']?>">Удалить</a>
+            </td>
+        </tr>
+    <?php }?>
 </table>
 </div>
+
 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');?>
