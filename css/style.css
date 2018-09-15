@@ -331,3 +331,12 @@ tr:last-child td.last {
     -moz-border-radius-bottomright:5px;
     -webkit-border-bottom-right-radius:5px; /* Saf3-4 */
 }
+
+.update{
+    color: #319c16;
+    font-size: 16px;
+}
+.del{
+    color: #dc4343;
+    font-size: 14px;
+}

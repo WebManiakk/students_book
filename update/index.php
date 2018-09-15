@@ -1,17 +1,21 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/header.php');?>
-<?php if($_REQUEST['id']){
+<?php if($_REQUEST['id']){ //перевіряєм чи сторінка відкрилась з параметром id
     $student = new student;
-    $arResult = $student->get_student($_REQUEST['id'])?>
+    if($_REQUEST['update']){ //перевіряєм чи форма була відправлена
+        $send = $student->update($_REQUEST['id'], $_REQUEST['name'], $_REQUEST['lastname'], $_REQUEST['age'], $_REQUEST['grup']); //відправляєм дані на обробку
+    }
+    $arResult = $student->get_student($_REQUEST['id']); //дістаєм поточного студента
+?>
 
 <div class="dashboard-content">
     <div class="headline buttons primary">
-		<h4>Форма редактирования студента</h4>
+		<h4>Форма редагування студента</h4>
 	</div>
     <div class="form-box-items">
         <div class="form-box-item">
-        	<h4>Редактировать</h4>
+        	<h4>Редагувати</h4>
         	<hr class="line-separator">
-        	<form id="profile-info-form">
+        	<form id="profile-info-form" method="POST">
         		<!-- INPUT CONTAINER -->
                 <input type="hidden" name="id" value="<?=$_REQUEST['id']?>">
                 <input type="hidden" name="update" value="Y">
@@ -35,9 +39,7 @@
                     <input type="text" id="personal_phone" name="grup" value="<?=$arResult['grup']?>" placeholder="Введіть ваш телефон">
         		</div>
                 <button type="submit" class="button mid-short primary">Зберегти зміни</button>
-                <?php if($_REQUEST['update']){
-                    $student->update($_REQUEST['id'], $_REQUEST['name'], $_REQUEST['lastname'], $_REQUEST['age'], $_REQUEST['grup']);
-                }?>
+                <?=$send?>
         	</form>
         </div>
     </div>

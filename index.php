@@ -1,16 +1,17 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/header.php');?>
 <?php
 $student = new student;
-$arResult = $student->get_students();
 if($_REQUEST['deleted']){
-    $student->delete($_REQUEST['deleted']);
+    $student->delete($_REQUEST['deleted']); //якщо є параметр видалення видаляєм студента
 }
+$arResult = $student->get_students(); // дістаєм список студентів
+
 ?>
 
 <div class="dashboard-content">
 
     <div class="headline buttons primary">
-		<h4>Список студентов</h4>
+		<h4>Список студентів</h4>
 	</div>
 
     <table cellspacing="0">
@@ -19,7 +20,7 @@ if($_REQUEST['deleted']){
         <th>Прізвище</th>
         <th>Вік</th>
         <th>Група</th>
-        <th>Действие</th>
+        <th>Дія</th>
     </tr>
     <?php foreach($arResult as $arItem){?>
         <tr>
@@ -27,8 +28,8 @@ if($_REQUEST['deleted']){
             <td><?=$arItem['lastname']?></td>
             <td><?=$arItem['age']?></td>
             <td><?=$arItem['grup']?></td>
-            <td><a href="/update/?id=<?=$arItem['id']?>">редактировать</a><br>
-                <a href="?deleted=<?=$arItem['id']?>">Удалить</a>
+            <td><a class="update" href="/update/?id=<?=$arItem['id']?>">Редагувати</a><br><br>
+                <a class="del" href="?deleted=<?=$arItem['id']?>">Видалити</a>
             </td>
         </tr>
     <?php }?>

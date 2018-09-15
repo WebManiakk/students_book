@@ -2,13 +2,13 @@
 $student = new student;?>
 <div class="dashboard-content">
     <div class="headline buttons primary">
-		<h4>Форма добавления нового студента</h4>
+		<h4>Форма добавлення нового студента</h4>
 	</div>
     <div class="form-box-items">
         <div class="form-box-item">
         	<h4>Добавити</h4>
         	<hr class="line-separator">
-        	<form action="">
+        	<form action="" method="POST">
         		<!-- INPUT CONTAINER -->
         		<div class="input-container">
                     <label for="first_name" class="rl-label">Ім'я</label>
@@ -33,7 +33,7 @@ $student = new student;?>
         	</form>
             <?php
             if($_REQUEST){
-                $student->add_students($_REQUEST['name'], $_REQUEST['lastname'], $_REQUEST['age'], $_REQUEST['grup']);
+                $student->add_students($_REQUEST['name'], $_REQUEST['lastname'], $_REQUEST['age'], $_REQUEST['grup']); // відправляєм дані на обробку
             };?>
         </div>
     </div>
